@@ -18,15 +18,15 @@ namespace tp_nuisibles
         {
             this.DimX = x;
             this.DimY = y;
-            this.init();
+            this.Init();
         }
 
-        public void show()
+        public void Show()
         {
             return;
         }
 
-        private void init()
+        private void Init()
         {
             int x, y;
             for (int i = 0; i < this.Nuisibles.Count; i++)
@@ -49,15 +49,26 @@ namespace tp_nuisibles
             y = random.Next(0, this.DimY);
             Nuisible nuisible = new Pigeon(2, new Position(x, y), Nuisible.STATE.ZOMBIE);
             this.Nuisibles.Add(nuisible);
-            
-            this.move(nuisible);
         }
 
         private void collide(Nuisible a, Nuisible b)
         {
+            Console.WriteLine($"Collision between {a.ToString()} and {b.ToString()}");
         }
 
-        private void move(Nuisible nuisible)
+
+        private void move(Nuisible nuisible, Position destination)
+        {
+            List<Nuisible> searchResult =  this.Nuisibles.FindAll(nuisibleElement => { return nuisibleElement.Position == destination; });
+            nuisible.Position = destination;
+
+            foreach (var nuisibleElement in searchResult)
+            {
+                this.collide(nuisibleElement, nuisible);
+            }
+        }
+
+        private Position SelectRandomDestinationFor(Nuisible nuisible)
         {
             List<Position> positions = new List<Position>();
             int xMax = nuisible.Position.X + nuisible.Speed;
@@ -90,8 +101,17 @@ namespace tp_nuisibles
             positions.Add(new Position(yMin, xMax));
 
             Position position = positions.ElementAt(this.random.Next(0, positions.Count));
-            Console.WriteLine(position.X);
-            Console.WriteLine(position.Y);
+            return position;
+        }
+
+        public void moveAllRandomly()
+        {
+            foreach (var nuisible in Nuisibles)
+            {
+                this.move(nuisible, this.SelectRandomDestinationFor(nuisible));
+            }
         }
     }
+    
+    
 }
