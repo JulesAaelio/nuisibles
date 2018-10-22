@@ -8,13 +8,15 @@ namespace tp_nuisibles
             ALIVE = 1,
             ZOMBIE = 2
         }
-        public float speed { get; set; }
-        public STATE state { get; set; }
+        public int Speed { get; set; }
+        public STATE State { get; set; }
+        public Position Position { get; set; }
 
-        public Nuisible(float speed, STATE state = STATE.ALIVE)
+        public Nuisible(int speed, Position position, STATE state = STATE.ALIVE)
         {
-            this.speed = speed;
-            this.state = state;
+            this.Speed = speed;
+            this.State = state;
+            this.Position = position;
         }
     }
 }
