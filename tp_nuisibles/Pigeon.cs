@@ -2,19 +2,19 @@ namespace tp_nuisibles
 {
     public class Pigeon:Nuisible
     {
-        public Pigeon(int speed, Position position, STATE state = STATE.ALIVE) : base(speed, position, state)
+        public Pigeon(Ecosystem ecosystem, int speed, Position position, STATE state = STATE.Alive) : base(ecosystem, speed, position, state)
         {
         }
 
-        public override string ToString()
+        public override void GetCollided(ICollideable collider)
         {
-            if (this.State == STATE.ZOMBIE)
+            base.GetCollided(collider);
+            if (this.IsCollideable())
             {
-                return "Z";
-            }
-            else
-            {
-                return "P";
+                if (collider.GetType() == typeof(Rat)) 
+                {
+                    this.Die();
+                }
             }
         }
     }

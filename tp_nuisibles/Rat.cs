@@ -2,20 +2,21 @@ namespace tp_nuisibles
 {
     public class Rat: Nuisible
     {
-        public Rat(int speed, Position position, STATE state = STATE.ALIVE) : base(speed, position, state)
+        public Rat(Ecosystem ecosystem, int speed, Position position, STATE state = STATE.Alive) : base(ecosystem, speed, position, state)
         {
         }
-
-        public override string ToString()
+        
+        public override void GetCollided(ICollideable collider)
         {
-            if (this.State == STATE.ZOMBIE)
+            base.GetCollided(collider);
+            if (this.IsCollideable())
             {
-                return "Z";
-            }
-            else
-            {
-                return "R";
+                if (collider.GetType() == typeof(Pigeon)) 
+                {
+                    this.Die();
+                }
             }
         }
+        
     }
 }

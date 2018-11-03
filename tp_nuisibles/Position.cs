@@ -10,5 +10,10 @@ namespace tp_nuisibles
             this.X = x;
             this.Y = y;
         }
+
+        public override bool Equals(object obj)
+        {
+            return (((Position)obj).X == this.X && ((Position)obj).Y == this.Y);
+        }
     }
 }
