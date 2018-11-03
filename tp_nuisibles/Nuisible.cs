@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 
 namespace tp_nuisibles
@@ -15,6 +16,7 @@ namespace tp_nuisibles
         public STATE State { get; set; }
         public Position Position { get; set; }
         private Ecosystem Ecosystem { get; set;  }
+        public Color Color { get; set; }
 
         public Nuisible(Ecosystem ecosystem, int speed, Position position, STATE state = STATE.Alive)
         {
@@ -22,11 +24,12 @@ namespace tp_nuisibles
             this.Speed = speed;
             this.State = state;
             this.Position = position;
+            this.Color = Color.Gray;
         }
 
         public Position SelectNextPosition()
         {
-            List<Position> positions = new List<Position>();
+            HashSet<Position> positions = new HashSet<Position>();
             int xMax = this.Position.X + this.Speed;
             int yMax = this.Position.Y + this.Speed;
             int xMin = this.Position.X - this.Speed;
@@ -44,19 +47,22 @@ namespace tp_nuisibles
             if (xMin < 0)
                 xMin = 0;
 
-            positions.Add(new Position(yMax, xMin));
-            positions.Add(new Position(yMax, this.Position.X));
-            positions.Add(new Position(yMax, xMax));
+            positions.Add(new Position(xMin, yMax));
+            positions.Add(new Position(this.Position.X,yMax));
+            positions.Add(new Position(xMax,yMax));
 
-            positions.Add(new Position(this.Position.Y, xMin));
-            positions.Add(new Position(this.Position.Y, this.Position.X));
-            positions.Add(new Position(this.Position.Y, xMax));
+            positions.Add(new Position(xMin, this.Position.Y));
+            positions.Add(new Position(xMax, this.Position.Y));
 
-            positions.Add(new Position(yMin, xMin));
-            positions.Add(new Position(yMin, this.Position.X));
-            positions.Add(new Position(yMin, xMax));
+            positions.Add(new Position(xMin, yMin));
+            positions.Add(new Position(this.Position.X, yMin));
+            positions.Add(new Position(xMax, yMin));
+
+            positions.RemoveWhere((Position pos) => { return pos.Equals(this.Position); });
 
             Position position = positions.ElementAt(this.Ecosystem.Random.Next(0, positions.Count));
+            Console.WriteLine($"Start : {this.Position.X} {this.Position.Y} to {position.X} {position.Y}");
+            
             return position;
         }
 
@@ -70,7 +76,10 @@ namespace tp_nuisibles
             this.Position = position;
             foreach (Nuisible nuisible in this.Ecosystem.NuisiblesAtPosition(this.Position))
             {
-                this.Collide(nuisible);
+                if (!nuisible.Equals(this))
+                {
+                    this.Collide(nuisible);
+                }
             }
         }
 
@@ -88,9 +97,10 @@ namespace tp_nuisibles
             if (this.IsCollideable())
             {
                 Console.WriteLine($" {this.ToString()} is getting collided by {collider.ToString()}");
-                if (collider.GetType() == typeof(Zombie))
+                if (collider.GetType() == typeof(Zombie) && this.GetType() != typeof(Zombie))
                 {
                     this.Zombify();
+                    Console.WriteLine("ZOMBIE");
                 } 
             }
         }
@@ -104,6 +114,7 @@ namespace tp_nuisibles
         {
             Console.WriteLine($" {this.ToString()} died");
             this.State = STATE.Dead;  
+            this.Color = Color.White;
         }
 
         public virtual void Zombify()
