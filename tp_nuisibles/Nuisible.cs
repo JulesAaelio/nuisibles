@@ -73,12 +73,16 @@ namespace tp_nuisibles
 
         public void MoveTo(Position position)
         {
-            this.Position = position;
-            foreach (Nuisible nuisible in this.Ecosystem.NuisiblesAtPosition(this.Position))
+           
+            if (this.State != STATE.Dead)
             {
-                if (!nuisible.Equals(this))
+                this.Position = position;
+                foreach (Nuisible nuisible in this.Ecosystem.NuisiblesAtPosition(this.Position))
                 {
-                    this.Collide(nuisible);
+                    if (!nuisible.Equals(this))
+                    {
+                        this.Collide(nuisible);
+                    }
                 }
             }
         }
