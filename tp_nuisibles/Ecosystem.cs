@@ -37,14 +37,16 @@ namespace tp_nuisibles
 
         public void ReplaceNuisible(Nuisible toReplace, Nuisible replacement)
         {
-            this.Nuisibles.Add(replacement);
-            this.Nuisibles.Remove(toReplace);
+            if (this.Nuisibles.Remove(toReplace))
+            {
+                this.Nuisibles.Add(replacement);
+            };
+
         }
 
         public void OnNuisibleMove()
         {
             this.EcosystemForm.Refresh();
-            Console.WriteLine(this.Nuisibles.Count);
         }
     }
     

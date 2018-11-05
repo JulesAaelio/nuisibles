@@ -17,6 +17,7 @@ namespace tp_nuisibles
         public virtual Position Position { get; set; }
         public virtual Ecosystem Ecosystem { get; set;  }
         public virtual Color Color { get; set; }
+        public virtual Guid Guid { get; set; } = Guid.NewGuid();
 
         protected Nuisible() {}
         
@@ -95,6 +96,12 @@ namespace tp_nuisibles
             {
                 Console.WriteLine($" {this.ToString()} is colliding {collided.ToString()}");
                 collided.GetCollided(this);
+                if (collided.GetType() == typeof(Zombie) && this.GetType() != typeof(Zombie))
+                {
+                    this.Zombify();
+                    Console.WriteLine($" {this.ToString()} turned into a Zombie. A");
+                } 
+                
             }
         }
 
@@ -105,8 +112,9 @@ namespace tp_nuisibles
                 Console.WriteLine($" {this.ToString()} is getting collided by {collider.ToString()}");
                 if (collider.GetType() == typeof(Zombie) && this.GetType() != typeof(Zombie))
                 {
+                    
                     this.Zombify();
-                    Console.WriteLine($" {this.ToString()} turned into a Zombie.");
+                    Console.WriteLine($" {this.ToString()} turned into a Zombie. B");
                 } 
             }
         }
@@ -126,6 +134,10 @@ namespace tp_nuisibles
         public virtual void Zombify()
         {
             Zombie zombie = new Zombie(this.Ecosystem, this.Speed, this.Position);
+            if (this.Ecosystem.Nuisibles.IndexOf(this) == -1)
+            {
+                Console.WriteLine("2");
+            }
             this.Ecosystem.ReplaceNuisible(this, zombie);
         }
 
@@ -134,10 +146,22 @@ namespace tp_nuisibles
             switch (State)
             {
                     case STATE.Dead:
-                        return "DEAD";
+                        return this.Guid.ToString();
                     default:
-                        return this.GetType().ToString();
+                        return this.GetType().ToString() + this.Guid.ToString(
+                                   );
             }
         }
+
+        public override int GetHashCode()
+        {
+            return this.Guid.GetHashCode();
+        }
+
+        public override bool Equals(object obj)
+        {
+            return this.Guid == ((Nuisible) obj).Guid;
+        }
+        
     }
 }

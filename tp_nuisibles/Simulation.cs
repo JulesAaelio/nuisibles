@@ -14,7 +14,7 @@ namespace tp_nuisibles
         {
             this.timer.Interval = timerInterval; //one minute
             this.timer.Elapsed += new System.Timers.ElapsedEventHandler(timer1_Tick);
-            this.Ecosystem = new RandomEcosystemFactory().Generate(20,20);
+            this.Ecosystem = new CitadinEcosystemFactory().Generate(20,20);
         }
 
         public void Start()

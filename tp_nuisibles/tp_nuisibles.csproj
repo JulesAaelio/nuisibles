@@ -47,7 +47,9 @@
     <Compile Include="EcosystemForm.cs" />
     <Compile Include="ICollideable.cs" />
     <Compile Include="Nuisible.cs" />
+    <Compile Include="NuisibleDecorator.cs" />
     <Compile Include="Pigeon.cs" />
+    <Compile Include="PigeonMutantDecorator.cs" />
     <Compile Include="Position.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
