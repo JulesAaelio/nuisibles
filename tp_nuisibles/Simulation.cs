@@ -14,7 +14,7 @@ namespace tp_nuisibles
         {
             this.timer.Interval = timerInterval; //one minute
             this.timer.Elapsed += new System.Timers.ElapsedEventHandler(timer1_Tick);
-            this.Ecosystem = new UmbrellaCorpEcosystemFacory().Generate(20,20);
+            this.Ecosystem = new RandomEcosystemFactory().Generate(20,20);
         }
 
         public void Start()
@@ -27,7 +27,6 @@ namespace tp_nuisibles
         private void timer1_Tick(object sender, System.Timers.ElapsedEventArgs e)
         {
            this.Ecosystem.MoveAllRandomly();
-           this.Ecosystem.EcosystemForm.Refresh();
         }
         
     }

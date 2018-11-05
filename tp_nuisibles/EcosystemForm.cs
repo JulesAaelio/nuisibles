@@ -17,13 +17,14 @@ namespace tp_nuisibles
 
         protected override void OnPaint(PaintEventArgs e)
         {
+            List<Nuisible> nuisibles = new List<Nuisible>(this.Ecosystem.Nuisibles);
             int size = 10;
             
             SolidBrush brushe = new SolidBrush(Color.Gray);
 
             Graphics formGraphics= this.CreateGraphics();
             
-            foreach (Nuisible nuisible in this.Ecosystem.Nuisibles)
+            foreach (Nuisible nuisible in nuisibles)
             {
                 Rectangle rectangle = new Rectangle(new Point(nuisible.Position.X * size, nuisible.Position.Y * size), new Size(size,size));
                 brushe.Color = nuisible.Color;
@@ -38,7 +39,8 @@ namespace tp_nuisibles
         protected void KeyPress1(Object sender, KeyPressEventArgs e)
         {
            this.Ecosystem.MoveAllRandomly();
-           this.Refresh();
+//           this.Refresh();
+
         }
     }
 }

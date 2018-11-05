@@ -40,6 +40,12 @@ namespace tp_nuisibles
             this.Nuisibles.Add(replacement);
             this.Nuisibles.Remove(toReplace);
         }
+
+        public void OnNuisibleMove()
+        {
+            this.EcosystemForm.Refresh();
+            Console.WriteLine(this.Nuisibles.Count);
+        }
     }
     
     

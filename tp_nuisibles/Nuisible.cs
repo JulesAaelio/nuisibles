@@ -12,12 +12,14 @@ namespace tp_nuisibles
             Dead = 0,
             Alive = 1
         }
-        public int Speed { get; set; }
-        public STATE State { get; set; }
-        public Position Position { get; set; }
-        private Ecosystem Ecosystem { get; set;  }
-        public Color Color { get; set; }
+        public virtual int Speed { get; set; }
+        public virtual  STATE State { get; set; }
+        public virtual Position Position { get; set; }
+        public virtual Ecosystem Ecosystem { get; set;  }
+        public virtual Color Color { get; set; }
 
+        protected Nuisible() {}
+        
         public Nuisible(Ecosystem ecosystem, int speed, Position position, STATE state = STATE.Alive)
         {
             this.Ecosystem = ecosystem;
@@ -61,7 +63,6 @@ namespace tp_nuisibles
             positions.RemoveWhere((Position pos) => { return pos.Equals(this.Position); });
 
             Position position = positions.ElementAt(this.Ecosystem.Random.Next(0, positions.Count));
-            Console.WriteLine($"Start : {this.Position.X} {this.Position.Y} to {position.X} {position.Y}");
             
             return position;
         }
@@ -84,6 +85,7 @@ namespace tp_nuisibles
                         this.Collide(nuisible);
                     }
                 }
+                this.Ecosystem.OnNuisibleMove();
             }
         }
 
