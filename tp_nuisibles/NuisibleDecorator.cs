@@ -44,6 +44,12 @@ namespace tp_nuisibles
             get { return Nuisible.Guid; }
         }
 
+        public override IMovingStrategy MovingStrategy
+        {
+            get { return this.Nuisible.MovingStrategy; }
+            set { this.Nuisible.MovingStrategy = value; }
+        }
+
         public NuisibleDecorator(Nuisible nuisible)
         {
             this.Nuisible = nuisible;

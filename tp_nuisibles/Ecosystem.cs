@@ -24,7 +24,7 @@ namespace tp_nuisibles
 
         public void MoveAllRandomly()
         {
-            foreach (var nuisible in Nuisibles)
+            foreach (Nuisible nuisible in Nuisibles)
             {
                 nuisible.MoveRandomly();
             }

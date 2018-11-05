@@ -46,8 +46,10 @@
     <Compile Include="EcosystemFactory.cs" />
     <Compile Include="EcosystemForm.cs" />
     <Compile Include="ICollideable.cs" />
+    <Compile Include="IMovingStrategy.cs" />
     <Compile Include="Nuisible.cs" />
     <Compile Include="NuisibleDecorator.cs" />
+    <Compile Include="PeacefulMovingStrategy.cs" />
     <Compile Include="Pigeon.cs" />
     <Compile Include="PigeonMutantDecorator.cs" />
     <Compile Include="Position.cs" />
@@ -55,6 +57,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RandomEcosystem.cs" />
     <Compile Include="RandomEcosystemFactory.cs" />
+    <Compile Include="RandomMovingStrategy.cs" />
     <Compile Include="Rat.cs" />
     <Compile Include="Simulation.cs" />
     <Compile Include="UmbrellaCorpEcosystem.cs" />

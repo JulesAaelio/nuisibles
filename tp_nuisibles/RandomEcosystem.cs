@@ -11,17 +11,15 @@ namespace tp_nuisibles
 
         protected override void Init()
         {
-            Console.WriteLine("init");
             int maxNuisiblesNumber = (int) (this.DimX * this.DimY * (20d / 100d));
             int remainingNuisiblesToGen = maxNuisiblesNumber;
-            Console.WriteLine(remainingNuisiblesToGen);
 
             int toGen = Random.Next(0, remainingNuisiblesToGen);
             for (int i = 0; i < toGen; i++)
             {
                 int x = this.Random.Next(0, this.DimX);
                 int y = this.Random.Next(0, this.DimY);
-                this.Nuisibles.Add(new Pigeon(this, 1, new Position(x,y) ));
+                this.Nuisibles.Add(new Rat(this, 1, new Position(x,y) ));
             }
             remainingNuisiblesToGen -= toGen;
             
@@ -50,7 +48,7 @@ namespace tp_nuisibles
             {
                 int x = this.Random.Next(0, this.DimX);
                 int y = this.Random.Next(0, this.DimY);
-                this.Nuisibles.Add(new Rat(this, 1, new Position(x,y) ));
+                this.Nuisibles.Add(new Pigeon(this, 1, new Position(x,y) ));
             }
             
          }
