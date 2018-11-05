@@ -9,25 +9,31 @@ namespace tp_nuisibles
     {
         public Timer timer = new System.Timers.Timer();
         public Ecosystem Ecosystem { get; set; }
+        public int Interval { get; set; } = 500;
+        public int SizeX { get; set; } = 20;
+        public int SizeY { get; set; } = 20;
+        public EcosystemType EcosystemType { get; set; } = EcosystemType.Random;
 
-        public Simulation(int timerInterval = 500)
+        public Simulation()
         {
-            this.timer.Interval = timerInterval; //one minute
             this.timer.Elapsed += new System.Timers.ElapsedEventHandler(timer1_Tick);
-            this.Ecosystem = new CitadinEcosystemFactory().Generate(4,4);
         }
 
+        public void Init()
+        {
+            this.timer.Interval = this.Interval; 
+            this.Ecosystem = new EcosystemFactory().Generate(this.EcosystemType ,this.SizeX,this.SizeY);
+        }
+        
         public void Start()
         {
             this.timer.Start();
             Application.Run(this.Ecosystem.EcosystemForm);
         }
-
        
         private void timer1_Tick(object sender, System.Timers.ElapsedEventArgs e)
         {
            this.Ecosystem.MoveAllRandomly();
         }
-        
     }
 }

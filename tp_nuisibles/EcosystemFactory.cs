@@ -1,7 +1,19 @@
 namespace tp_nuisibles
 {
-    public abstract class EcosystemFactory
+    public class EcosystemFactory: IEcosystemFactory
     {
-        public abstract Ecosystem Generate(int x, int y); 
+        
+        public  Ecosystem Generate(EcosystemType type, int xDimension, int yDimension)
+        {
+            switch (type) {
+            
+                case EcosystemType.Random: 
+                    return new RandomEcosystem(xDimension, yDimension);
+                case EcosystemType.UmbrellaCorp:
+                    return new UmbrellaCorpEcosystem(xDimension, yDimension);
+                default:
+                    return new CitadinEcosystem(xDimension, yDimension);
+            }
+        }
     }
 }

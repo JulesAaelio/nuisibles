@@ -32,7 +32,7 @@ namespace tp_nuisibles
             this.State = state;
             this.Position = position;
             this.Color = Color.Gray;
-            this.MovingStrategy = new PeacefulMovingStrategy(this);
+            this.MovingStrategy = new RandomMovingStrategy(this);
         }
 
         public Position SelectNextPosition()

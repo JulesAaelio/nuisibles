@@ -9,6 +9,11 @@ namespace tp_nuisibles
         public static void Main(string[] args)
         {
             Simulation simulation = new Simulation();
+            simulation.Interval = 500;
+            simulation.SizeX = 10;
+            simulation.SizeY = 10;
+            simulation.EcosystemType = EcosystemType.Citadin;
+            simulation.Init();
             simulation.Start();
         }
     }
