@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace tp_nuisibles
 {
-    public class Nuisible: ICollideable
+    public abstract class Nuisible: ICollideable
     {
         public enum STATE
         {
@@ -100,7 +100,7 @@ namespace tp_nuisibles
                 if (collider.GetType() == typeof(Zombie) && this.GetType() != typeof(Zombie))
                 {
                     this.Zombify();
-                    Console.WriteLine("ZOMBIE");
+                    Console.WriteLine($" {this.ToString()} turned into a Zombie.");
                 } 
             }
         }

@@ -40,7 +40,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CitadinEcosystemFactory.cs" />
+    <Compile Include="CitadinEcosystem.cs" />
     <Compile Include="Ecosystem.cs" />
+    <Compile Include="EcosystemFactory.cs" />
     <Compile Include="EcosystemForm.cs" />
     <Compile Include="ICollideable.cs" />
     <Compile Include="Nuisible.cs" />
@@ -48,8 +51,12 @@
     <Compile Include="Position.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RandomEcosystem.cs" />
+    <Compile Include="RandomEcosystemFactory.cs" />
     <Compile Include="Rat.cs" />
     <Compile Include="Simulation.cs" />
+    <Compile Include="UmbrellaCorpEcosystem.cs" />
+    <Compile Include="UmbrellaCorpEcosystemFactory.cs" />
     <Compile Include="Zombie.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
